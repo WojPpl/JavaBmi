@@ -10,14 +10,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.fragment.app.Fragment;
 
 
 import com.example.javabmi.R;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -45,6 +45,11 @@ public class HomeFragment extends Fragment {
                 Float age = Float.valueOf(ageEdit.getText().toString());
                 Float bmi = (weight / ((height*height) / 100))*100;
                 Double calories;
+                Bundle bundle = new Bundle();
+
+                bundle.putString("bmi", bmi.toString());
+
+                requireActivity().getSupportFragmentManager().setFragmentResult("request_Key", bundle);
 
                 if(male.isChecked()) {
                     calories = 66.47 + 13.7 * weight + 5 * height - 6.76 * age;
@@ -52,7 +57,8 @@ public class HomeFragment extends Fragment {
                 else {
                     calories = 655.1 + (9.567 * weight) + (1.85 * height) - (4.68 * age);
                 }
-                info = "Your BMI: " + bmi.toString() + "\nYou can eat " + calories.toString() + " calories";
+                NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
+                info = "Your BMI: " + nf.format(bmi)+ "\nYou can eat " + nf.format(calories) + " calories";
                 result.setText(info);
             }
         });
