@@ -22,4 +22,10 @@
         android:name="com.example.javabmi.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_statistics"
+        android:name="com.example.javabmi.ui.statistics.StatisticsFragment"
+        android:label="@string/title_stats"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>
